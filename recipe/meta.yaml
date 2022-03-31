@@ -1,5 +1,5 @@
 {% set name = "aws-session-manager-plugin" %}
-{% set version = "1.2.295.0" %}
+{% set version = "1.2.312.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://github.com/{{ name.replace("-", "/", 1) }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: b918393a02258371869c7a04a7ad711dce29acd52f395c60db35a8a8710ce7bf
+  sha256: 61f74c2472b4f3ec31e894e3388d659125284f62e164246bee2e739cff2e845c
 
 build:
   number: 0
   # Currently fails to build on Windows with Conda
-  skip: True  # [win] 
+  skip: true  # [win]
 
 requirements:
   build:
