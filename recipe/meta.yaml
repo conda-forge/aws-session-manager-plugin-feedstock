@@ -8,17 +8,20 @@ package:
 source:
   url: https://github.com/{{ name.replace("-", "/", 1) }}/archive/refs/tags/{{ version }}.tar.gz
   sha256: 61f74c2472b4f3ec31e894e3388d659125284f62e164246bee2e739cff2e845c
+  patches:
+    - windows-makefile-1.2.312.0.patch  # [win]
 
 build:
-  number: 0
-  # Currently fails to build on Windows with Conda
-  skip: true  # [win]
+  number: 1
 
 requirements:
   build:
     - {{ compiler('go') }} 1.15
     - go-licenses >=0.0.44
     - make
+    # Makefile uses some unix shell utilities
+    - m2-base  # [win]
+    - m2-patch  # [win]
 
   run:
     - awscli
