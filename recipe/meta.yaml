@@ -17,7 +17,8 @@ build:
 requirements:
   build:
     - {{ compiler('go') }} 1.15
-    - go-licenses >=0.0.44
+    # 1.1.0 requires aws/session-manager-plugin to use git modules
+    - go-licenses >=0.0.44,<1.1.0
     - make
     # Makefile uses some unix shell utilities
     - m2-base  # [win]
