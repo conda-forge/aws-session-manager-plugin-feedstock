@@ -16,7 +16,7 @@ build:
 
 requirements:
   build:
-    - {{ compiler('go') }} 1.15
+    - {{ compiler('go') }} 1.17
     # 1.1.0 requires aws/session-manager-plugin to use git modules
     - go-licenses >=0.0.44,<1.1.0
     - make
