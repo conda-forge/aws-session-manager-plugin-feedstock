@@ -9,7 +9,7 @@ source:
   url: https://github.com/{{ name.replace("-", "/", 1) }}/archive/refs/tags/{{ version }}.tar.gz
   sha256: 85a511b849f480613b9119f4c800c6ae427b366da463714ade1ccf470de43a99
   patches:
-    - windows-makefile-1.2.312.0.patch  # [win]
+    - makefile-1.2.398.0.patch
 
 build:
   number: 0
