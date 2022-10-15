@@ -16,6 +16,8 @@ cp \
   "$PREFIX/bin"
 
 # Some vendor directories don't have a licence file
-GOPATH="$( pwd )/vendor" go-licenses save ./src/sessionmanagerplugin-main/ ./src/ssmcli-main/ --save_path=./license-files || true
+export GOPATH="$( pwd )/vendor"
+export GO111MODULE=auto
+go-licenses save ./src/sessionmanagerplugin-main/ ./src/ssmcli-main/ --save_path=./license-files || true
 
 test -d license-files/github.com
