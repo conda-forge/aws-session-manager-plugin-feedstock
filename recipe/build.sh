@@ -9,6 +9,12 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
     unset GOARCH
 fi
 
+# The VERSION file doesn't seem to be updated in the repository-
+# maybe it's updated by an internal AWS build process?
+echo -n "${PKG_VERSION}" > VERSION
+# Without this the old version string is still used
+make pre-build
+
 if [[ "${target_platform}" == osx-64 ]]; then
   MACHINE=darwin
   MACHINE_ARCH=amd64
