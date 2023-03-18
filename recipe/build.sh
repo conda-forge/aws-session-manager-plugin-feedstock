@@ -1,6 +1,13 @@
 #!/bin/bash
 set -eu
 
+# Makefile runs some go commands on native host, then handles cross compilation using build targets
+# Unset the cross-compilation variables set by Conda
+# https://github.com/conda-forge/go-feedstock/issues/132
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+    unset GOOS
+    unset GOARCH
+fi
 
 if [[ "${target_platform}" == osx-64 ]]; then
   MACHINE=darwin
@@ -23,6 +30,7 @@ else
   echo "Unsupported platform: ${target_platform}"
   exit 1
 fi
+
 make "build-${MACHINE}-${MACHINE_ARCH}"
 
 mkdir -p $PREFIX/bin
