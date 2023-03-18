@@ -36,14 +36,8 @@ make "${MAKE_TARGET}"
 mkdir -p $PREFIX/bin
 cp \
   "${SRC_DIR}/bin/${MACHINE}_${MACHINE_ARCH}_plugin/session-manager-plugin" \
-  "$PREFIX/bin"
-
-# ssmcli is missing on linux arm64
-if [[ "${MAKE_TARGET}" != build-arm64 ]]; then
-cp \
   "${SRC_DIR}/bin/${MACHINE}_${MACHINE_ARCH}/ssmcli" \
   "$PREFIX/bin"
-fi
 
 
 # Some vendor directories don't have a licence file

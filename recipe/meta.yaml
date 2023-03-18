@@ -9,7 +9,7 @@ source:
   url: https://github.com/{{ name.replace("-", "/", 1) }}/archive/refs/tags/{{ version }}.tar.gz
   sha256: 3dae895516e3951a0f8c58acadb9491618a1ee31e263e47a499d37e161918480
   patches:
-    - makefile-1.2.398.0.patch
+    - makefile-1.2.463.0.patch
 
 build:
   number: 0
