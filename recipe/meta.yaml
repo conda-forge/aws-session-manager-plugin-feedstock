@@ -9,14 +9,14 @@ source:
   url: https://github.com/{{ name.replace("-", "/", 1) }}/archive/refs/tags/{{ version }}.tar.gz
   sha256: 3dae895516e3951a0f8c58acadb9491618a1ee31e263e47a499d37e161918480
   patches:
-    - makefile-1.2.398.0.patch
+    - makefile-1.2.463.0.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
-    - {{ compiler('go') }} 1.17
+    - {{ compiler('go') }} >=1.17
     # 1.1.0 requires aws/session-manager-plugin to use git modules
     - go-licenses >=0.0.44,<1.1.0
     - make

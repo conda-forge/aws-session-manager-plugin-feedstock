@@ -1,0 +1,52 @@
+diff --git a/makefile b/makefile
+index 8c5de96..43536a9 100644
+--- a/makefile
++++ b/makefile
+@@ -1,5 +1,5 @@
+ COPY := cp -p
+-GO_BUILD := go build -i
++GO_BUILD := go build
+ 
+ # Default build configuration, can be overridden at build time.
+ GOARCH?=$(shell go env GOARCH)
+@@ -8,8 +8,11 @@ GOOS?=$(shell go env GOOS)
+ GO_SPACE?=$(CURDIR)
+ GOTEMPPATH?=$(GO_SPACE)/build/private
+ GOTEMPCOPYPATH?=$(GOTEMPPATH)/src/github.com/aws/session-manager-plugin
+-GOPATH:=$(GOTEMPPATH):$(GO_SPACE)/vendor:$(GOPATH)
+-
++ifeq (,$(findstring Windows,$(OS)))
++	GOPATH:=$(GOTEMPPATH):$(GO_SPACE)/vendor:$(GOPATH)
++else
++	GOPATH:=$(GOTEMPPATH);$(GO_SPACE)/vendor;$(GOPATH)
++endif
+ export GOPATH
+ export GO_SPACE
+ export GO111MODULE=auto
+@@ -108,6 +111,8 @@ build-arm64: checkstyle copy-src pre-build
+ 	@echo "Build for ARM64 platform"
+ 	GOOS=linux GOARCH=arm64 $(GO_BUILD) -ldflags "-s -w -extldflags=-Wl,-z,now,-z,relro,-z,defs" -o $(GO_SPACE)/bin/linux_arm64_plugin/session-manager-plugin -v \
+ 		$(GO_SPACE)/src/sessionmanagerplugin-main/main.go
++	GOOS=linux GOARCH=arm64 $(GO_BUILD) -ldflags "-s -w" -o $(GO_SPACE)/bin/linux_arm64/ssmcli -v \
++    		$(GO_SPACE)/src/ssmcli-main/main.go
+ 
+ .PHONY: build-darwin-arm64
+ build-darwin-arm64: checkstyle copy-src pre-build
+@@ -126,7 +131,7 @@ build-darwin-amd64: checkstyle copy-src pre-build
+     		$(GO_SPACE)/src/ssmcli-main/main.go
+ 
+ .PHONY: build-windows-amd64
+-build-windows-amd64: checkstyle copy-src pre-build
++build-windows-amd64: copy-src pre-build
+ 	@echo "Build for windows platform"
+ 	GOOS=windows GOARCH=amd64 $(GO_BUILD) -ldflags "-s -w" -o $(GO_SPACE)/bin/windows_amd64_plugin/session-manager-plugin.exe -v \
+ 		$(GO_SPACE)/src/sessionmanagerplugin-main/main.go
+@@ -134,7 +139,7 @@ build-windows-amd64: checkstyle copy-src pre-build
+     		$(GO_SPACE)/src/ssmcli-main/main.go
+ 
+ .PHONY: build-windows-386
+-build-windows-386: checkstyle copy-src pre-build
++build-windows-386: copy-src pre-build
+ 	@echo "Build for windows platform"
+ 	GOOS=windows GOARCH=386 $(GO_BUILD) -ldflags "-s -w" -o $(GO_SPACE)/bin/windows_386_plugin/session-manager-plugin.exe -v \
+ 		$(GO_SPACE)/src/sessionmanagerplugin-main/main.go
