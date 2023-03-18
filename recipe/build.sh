@@ -12,15 +12,12 @@ fi
 if [[ "${target_platform}" == osx-64 ]]; then
   MACHINE=darwin
   MACHINE_ARCH=amd64
-  MAKE_TARGET=build-${MACHINE}-${MACHINE_ARCH}
 elif [[ "${target_platform}" == osx-arm64 ]]; then
   MACHINE=darwin
   MACHINE_ARCH=arm64
-  MAKE_TARGET=build-${MACHINE}-${MACHINE_ARCH}
 elif [[ "${target_platform}" == linux-64 ]]; then
   MACHINE=linux
   MACHINE_ARCH=amd64
-  MAKE_TARGET=build-${MACHINE}-${MACHINE_ARCH}
 elif [[ "${target_platform}" == linux-aarch64 ]]; then
   MACHINE=linux
   MACHINE_ARCH=arm64
@@ -31,7 +28,10 @@ else
   exit 1
 fi
 
-make "build-${MACHINE}-${MACHINE_ARCH}"
+if [[ -z "${MAKE_TARGET:-}" ]]; then
+  MAKE_TARGET=build-${MACHINE}-${MACHINE_ARCH}
+fi
+make "${MAKE_TARGET}"
 
 mkdir -p $PREFIX/bin
 cp \
