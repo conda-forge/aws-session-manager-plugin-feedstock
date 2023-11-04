@@ -10,6 +10,7 @@ source:
   sha256: 9056970646295e327ce7912709618b986edce41e20e968403bd6dcadc70f8b9d
   patches:
     - makefile-1.2.463.0.patch
+    - gofmt-1.2.497.0.patch
 
 build:
   number: 0
