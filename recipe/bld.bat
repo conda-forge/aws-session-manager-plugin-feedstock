@@ -1,3 +1,6 @@
+@REM Make sure we build with the conda-forge go toolchain
+SET GOTOOLCHAIN=local
+
 @REM The VERSION file doesn't seem to be updated in the repository-
 @REM maybe it's updated by an internal AWS build process?
 @REM Echo without newline https://stackoverflow.com/questions/7105433/windows-batch-echo-without-new-line

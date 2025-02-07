@@ -1,6 +1,9 @@
 #!/bin/bash
 set -eu
 
+# Make sure we build with the conda-forge go toolchain
+export GOTOOLCHAIN=local
+
 # Makefile runs some go commands on native host, then handles cross compilation using build targets
 # Unset the cross-compilation variables set by Conda
 # https://github.com/conda-forge/go-feedstock/issues/132
