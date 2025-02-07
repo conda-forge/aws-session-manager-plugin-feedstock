@@ -1,5 +1,5 @@
 {% set name = "aws-session-manager-plugin" %}
-{% set version = "1.2.688.0" %}
+{% set version = "1.2.707.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name.replace("-", "/", 1) }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 09eef664600c4bffec0e9707bc0f2dc6cd59e5730d659f8b6b7a797e2e7043d5
+  sha256: f7a1d1152f8b1322babdb9551e62b08efbcb334c46c2fc17a84615c176a0389b
   patches:
     - makefile-1.2.463.0.patch
 
@@ -16,7 +16,7 @@ build:
 
 requirements:
   build:
-    - {{ compiler('go') }} >=1.17
+    - {{ compiler('go') }} >=1.23
     # 1.1.0 requires aws/session-manager-plugin to use git modules
     - go-licenses >=0.0.44,<1.1.0
     - make
