@@ -1,5 +1,5 @@
 {% set name = "aws-session-manager-plugin" %}
-{% set version = "1.2.707.0" %}
+{% set version = "1.2.764.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name.replace("-", "/", 1) }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: f7a1d1152f8b1322babdb9551e62b08efbcb334c46c2fc17a84615c176a0389b
+  sha256: d23c02129bf42641618a8bdbf2b5fb5375c358444c80b392a81ef163e42e1320
   patches:
     - makefile-1.2.463.0.patch
 
