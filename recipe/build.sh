@@ -48,6 +48,10 @@ cp \
   "${SRC_DIR}/bin/${MACHINE}_${MACHINE_ARCH}/ssmcli" \
   "$PREFIX/bin"
 
+# go-licenses 1.0.0 isn't built for osx-arm64
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" && "${target_platform}" == osx-arm64 ]]; then
+  go install github.com/google/go-licenses@v1.0.0
+fi
 
 # Some vendor directories don't have a licence file
 export GOPATH="$( pwd )/vendor"
