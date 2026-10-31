@@ -19,7 +19,8 @@ requirements:
     - {{ compiler('go') }} >=1.23
     - {{ stdlib("c") }}
     # 1.1.0 requires aws/session-manager-plugin to use git modules
-    - go-licenses >=0.0.44,<1.1.0
+    # 1.0.0 isn't built for arm64
+    - go-licenses >=0.0.44,<1.1.0  # [not (osx and arm64)]
     - make
     # Makefile uses some unix shell utilities
     - m2-base  # [win]
